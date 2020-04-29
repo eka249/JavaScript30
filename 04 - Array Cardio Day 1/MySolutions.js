@@ -89,11 +89,24 @@ console.table(ordered);
 
 // Array.prototype.reduce()
 // 4. How many years did all the inventors live?
-const totalYears = inventors.reduce(passed - year);
-console.log(totalYears);
+const totalYearsReduce = inventors.reduce((total, inv) => {
+  return total + (inv.passed - inv.year);
+}, 0);
+console.log("total using reduce", totalYearsReduce);
+
+let totalFor = 0;
+for (let i = 0; i <= inventors.length - 1; i++) {
+  let life = inventors[i].passed - inventors[i].year;
+  totalFor += life;
+}
+
+console.log("total using for loop", totalFor);
 
 // 5. Sort the inventors by years lived
-
+let oldest = inventors.sort((first, next) => {
+  let firstage = first.passed - first.year;
+  let nextage = next.passed - next.year(firstage > nextage) ? 1 : -2;
+});
 console.table(oldest);
 
 // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
@@ -107,6 +120,12 @@ console.table(oldest);
 
 // 7. sort Exercise
 // Sort the people alphabetically by last name
+
+let alpha = people.sort((first, next) => {
+  let [LnameF, FnameF] = first.split(", ");
+  let [LnameN, FnameN] = next.split(", ");
+  return LnameF > LnameN ? 1 : -1;
+});
 
 console.log(alpha);
 
@@ -129,5 +148,20 @@ const data = [
   "truck",
   "pogostick",
 ];
+
+var transportation = data
+  .map((trans) => {
+    return {
+      count: 1,
+      string: trans,
+    };
+  })
+
+  .reduce((a, b) => {
+    a[b.trans] = (a[b.trans] || 0) + b.count;
+    return a;
+  }, {});
+
+// var duplicates = Object.keys(uniq).filter((a) => uniq[a] > 1)
 
 console.log(transportation);
